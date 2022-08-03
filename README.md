@@ -42,9 +42,9 @@ DIR='/work/'
 cat << EOF >> ~/.bashrc
 export PS1="[\u \w]\$ "
 
-TODAYSDIR=${DIR}sandbox/`date +%Y-%m-%d`
-mkdir -p ${TODAYSDIR} > /dev/null 2>&1
-alias sandbox="cd ${TODAYSDIR}"
+TODAYSDIR=${DIR}sandbox/\`date +%Y-%m-%d\`
+mkdir -p \${TODAYSDIR} > /dev/null 2>&1
+alias sandbox="cd \${TODAYSDIR}"
 EOF
 
 cat << EOF > ~/.vimrc
