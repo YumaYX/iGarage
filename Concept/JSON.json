@@ -1,0 +1,14 @@
+{
+  "key1": "value1",
+  "key2": 9,
+  "key3": {
+    "h_key1": "h_value1"
+  },
+  "key4": [
+    24,
+    true,
+    {
+      "a_key1": "a_value1"
+    }
+  ]
+}
