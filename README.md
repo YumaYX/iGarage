@@ -39,12 +39,23 @@ EOF
 
 ```sh
 DIR='/work/'
-cat << EOF >> ~/.bashrc
+cat << EOF > ${DIR}data/config
+WDIR='${DIR}'
+WAREDIR='/warehouse/'
+EOF
+
+cat << EOF > ${DIR}data/init
+. ${DIR}data/config
+
 export PS1="[\u \w]\$ "
 
-TODAYSDIR=${DIR}sandbox/\`date +%Y-%m-%d\`
+TODAYSDIR=\${WDIR}sandbox/\`date +%Y-%m-%d\`
 mkdir -p \${TODAYSDIR} > /dev/null 2>&1
 alias sandbox="cd \${TODAYSDIR}"
+EOF
+
+cat << EOF >> ~/.bash_profile
+. ${DIR}data/init
 EOF
 
 cat << EOF > ~/.vimrc
@@ -74,10 +85,6 @@ set wildmode=list:longest
 " シンタックスハイライトの有効化
 syntax enable
 
-" Tab系
-" 不可視文字を可視化(タブが「▸-」と表示される)
-set list listchars=tab:\▸\-
-
 " 検索系
 " 検索文字列に大文字が含まれている場合は区別して検索する
 set smartcase
@@ -88,4 +95,12 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 EOF
+
+cat << EOF >> ~/.gemrc 
+install: --no-document
+update: --no-document
+EOF
+
+git clone 'https://github.com/YumaYX/RubyBox' && cp -pr RubyBox/* ${DIR}
+
 ```
