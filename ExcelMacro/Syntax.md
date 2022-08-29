@@ -201,3 +201,14 @@ Selection.ClearContents
 | All Cells | Cells.Select |
 | A Column | Columns("A:A").Select |
 | B2 Cells | Range("B2").Select |
+
+# 印刷／プリント
+
+```
+' プリンタ確認
+MsgBox Application.ActivePrinter
+'印刷
+Application.ActivePrinter = ""
+' シート.PrintOut
+ActiveSheet.PrintOut
+```
