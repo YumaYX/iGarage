@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ ${#} -ne 1 ]; then
+  echo "ERROR: Argument Error"; exit 255
+  exit
+fi
+
+t="${1}"
+
+current_dir=`pwd`
+
+if [ -e "${current_dir}/${t}" ] ; then
+  echo
+  echo "${current_dir}/${t}"
+  echo
+else
+  echo "Error."
+  exit 100
+fi
+
+exit 0
