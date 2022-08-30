@@ -48,6 +48,7 @@ cat << EOF > ${DIR}data/init
 . ${DIR}data/config
 
 export PS1="[\u \w]\$ "
+export PATH="${DIR}bin:$PATH"
 
 TODAYSDIR=\${WDIR}sandbox/\`date +%Y-%m-%d\`
 mkdir -p \${TODAYSDIR} > /dev/null 2>&1
