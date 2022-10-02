@@ -2,7 +2,6 @@
 
 ```vb
 Cells(Y, X)
-' X, Yが逆
 ```
 
 ## Cell
@@ -12,16 +11,16 @@ Cells(Y, X)
 Range("cellname")
 ```
 
-# 変数宣言
+# Variable Declaration
 
-## 初期値宣言
+## Default
 
 ```vb
-Dim 変数名 As 型: 変数名 = 初期値
-Dim 変数名 As 型: Set 変数名 = 初期値
+Dim name As type: name = init val
+Dim name As type: Set name = init val
 ```
 
-## ワークブック
+## WorkBook
 
 ```vb
 Dim wb as WorkBook
@@ -30,7 +29,7 @@ Set wb = Workbooks("Book1.xlsx")
 Dim wb As Worksheet: Set wb = Workbooks("Book1.xlsx")
 ```
 
-## シート
+## Sheet
 
 ```vb
 Dim ws As Worksheet
@@ -55,7 +54,7 @@ Dim i As Long
 Dim i As Integer: i = 0
 ```
 
-## 配列
+## Array
 
 ```vb
 Dim array() As String
@@ -63,7 +62,7 @@ ReDim array(32)
 array(0)= "a"
 ```
 
-### 配列使い方
+### Control Array
 
 ```vb
 Dim array_index as Integer
@@ -75,30 +74,30 @@ Next array_index
 ## If
 
 ```vb
-If 条件 Then
-    処理1
-ElseIf 条件 Then
-    処理2
+If condition Then
+    ` Processing1
+ElseIf condition Then
+    ` Processing2
 Else
-    処理3
+    ` Processing3
 End if
 ```
 
-## 演算子
+## Comparing Operator
 
-| 内容 | 記号 | 例 |
+| meaning | operator | examle |
 | --- | --- | --- |
-| 否定 | <> | 1<>1 |
-| 等価 | = | 1=1(ひとつ) |
-| かつ | And | - |
-| または | Or | - |
+| not | <> | 1<>1 |
+| equal | = | 1=1 |
+| and | And | - |
+| or | Or | - |
 
-# 表示/デバッグ
+# Display/Debug
 
 | Code | Destination |
 | --- | --- |
-| Debug.print("a") | イミディエイトウィンドウ |
-| MsgBox "b" | 新規ウィンドウ |
+| Debug.print("a") | immediate windows |
+| MsgBox "b" | new window |
 
 # Loop
 
@@ -119,23 +118,23 @@ For Each item In Worksheets
 Next
 ```
 
-# 特殊変数
+# Special Variable
 
-| 内容 | 変数 |
+| target | variable |
 | --- | --- |
-| VBAコードが記述されているブック | ThisWorkbook |
-| 現在表示されているブック | ActiveWorkBook |
-| 現在表示されているシート | ActiveSheet |
+| book | ThisWorkbook |
+| active book | ActiveWorkBook |
+| active sheet | ActiveSheet |
 
-# 最大行最終行取得
+# Get Maximum Number of Last Line
 
 ```vb
 sheet_name = "Sheet Name"
 Worksheets(sheet_name).Cells(Rows.Count, 1).End(xlUp).Row
-' 1列目
+' 1 column
 ```
 
-# シート名取得
+# Get Sheet Name
 
 ```vb
 Dim i As Long
@@ -190,14 +189,14 @@ Next i
 wb2.Close
 ```
 
-### ファイル名指定
-| 絶対パス | フルパスの場所 |
+### Target File Name
+| absolute path | location |
 | --- | --- |
 | File Name | Documents |
-| 相対Path | Documentsから見て |
+| relative path | Documents |
 | Current Dir | ThisWorkbook.Path & "File Name" |
 
-# セル内容削除
+# Delete Cell Values
 
 ```vb
 Selection.ClearContents
@@ -209,14 +208,14 @@ Selection.ClearContents
 | A Column | Columns("A:A").Select |
 | B2 Cells | Range("B2").Select |
 
-# 印刷／プリント
+# Print
 
 ```vb
-' プリンタ確認
+' Check Printer
 MsgBox Application.ActivePrinter
-'印刷
+' Print Out
 Application.ActivePrinter = ""
-' シート.PrintOut
+' sheet.PrintOut
 ActiveSheet.PrintOut
 ```
 
