@@ -61,21 +61,4 @@ Sub OutputColumn()
   '''''''''''''''''''''''''''''''''''''''''''''''''
 End Sub
 
-' テーブルのhash化
-Public Function hash(ByRef table As Range, _
-    ByVal key_column_name As String, _
-    ByVal key_name As String, _
-    ByVal column_name As String)
-  Set target_table = table.ListObject
-  For i = 1 To target_table.ListColumns(column_name).DataBodyRange.Count
-    target_key = target_table.ListColumns(key_column_name).DataBodyRange(i)
-    target_value = target_table.ListColumns(column_name).DataBodyRange(i)
-    if target_key = key_name Then
-      hash = target_value
-      Exit Function
-    End If
-  Next
-End Function
-' hash(range_table,key_clm ,key, val_clm)
-
 ```
