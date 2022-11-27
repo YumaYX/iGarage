@@ -1,132 +1,149 @@
-# Cells
+# セル
+
+- Cells(Y,X)
+- Range("cell / cell name")
+- Range("Table")
+
+## 選択
+
+| 選択対象 | コード |
+| --- | --- |
+| 全てのセル | Cells.Select |
+| A列 | Columns("A:A").Select |
+| B2セル | Range("B2").Select |
+
+### セルの内容削除
 
 ```vb
-Cells(Y, X)
+Selection.Delete 
 ```
 
-## Cell
+# 変数
 
 ```vb
-' Cell's Name => cellname
-Range("cellname")
-```
-
-# Variable Declaration
-
-## Default
-
-```vb
-Dim name As type: name = init val
-Dim name As type: Set name = init val
-```
-
-## WorkBook
-
-```vb
+'WorkBook
 Dim wb as WorkBook
 Set wb = Workbooks("Book1.xlsx")
-
 Dim wb As Worksheet: Set wb = Workbooks("Book1.xlsx")
-```
 
-## Sheet
-
-```vb
+'Sheet
 Dim ws As Worksheet
 Set ws = Sheets("Sheet1")
-
-Dim ws As Worksheet: Set ws = Sheets("index")
+Dim ws As Worksheet: Set ws = Sheets("Sheet1")
 Worksheets("Sheet Name")
 Sheets("Sheet Name")
-```
 
-## String
-
-```vb
+'String, Integer, Long
 Dim str As String
 Dim str As String: str = "abcd"
-```
 
-## Integer
-
-```vb
-Dim i As Long
-Dim i As Integer: i = 0
-```
-
-## Array
-
-```vb
+'Array
 Dim array() As String
 ReDim array(32)
-array(0)= "a"
-```
+array(0)= "first"
 
-### Control Array
-
-```vb
 Dim array_index as Integer
 For array_index = 0 To UBound(array)
     Cells(i + 1, 1).Value = array(array_index)
 Next array_index
+
+'コレクション
+Dim col As VBA.Collection
+Set col = New VBA.Collection
+col.Add "a"
+
+Dim iter As Variant
+For Each iter In col
+    Debug.Print iter
+Next iter
+
+'連想配列
+Dim dic as Object
+Set dic = CreateObject("Scripting.Dictionary")
+dic.Item(1) = "a"
+
+Dim k As Variant
+For Each k In dic
+    Debug.Print dic.Item(k)
+Next k
 ```
 
-## If
+# If
 
 ```vb
-If condition Then
-    ` Processing1
-ElseIf condition Then
-    ` Processing2
+If 条件 Then
+    '処理
+ElseIf 条件 Then
+    '処理
 Else
-    ` Processing3
+    '処理
 End if
 ```
 
-## Comparing Operator
+# 特別な変数
 
-| meaning | operator | examle |
+- ThisWorkbook
+- ThisWorkbook.Path
+- ActiveWorkBook
+- ActiveSheet
+
+## 演算子
+
+| 意味 | 演算子 | 例 |
 | --- | --- | --- |
-| not | <> | 1<>1 |
-| equal | = | 1=1 |
-| and | And | - |
-| or | Or | - |
+| not | <> | 1 <> 0 |
+| equal | = | 1 = 1 |
+| and | And | True And True|
+| or | Or | True Or False |
+| 否定 | Not | Not False |
 
-# Display/Debug
 
-| Code | Destination |
-| --- | --- |
-| Debug.print("a") | immediate windows |
-| MsgBox "b" | new window |
-
-# Loop
-
-for
+# 繰り返し
 
 ```vb
+'for
 Dim i As Integer
 For i = 1 To 10
     Debug.Print(i)
 Next
-```
 
-object
-
-```vb
-For Each item In Worksheets
+'object
+For Each item In オブジェクト
     Debug.Print(item.Name)
 Next
 ```
 
-# Special Variable
 
-| target | variable |
-| --- | --- |
-| book | ThisWorkbook |
-| active book | ActiveWorkBook |
-| active sheet | ActiveSheet |
+# デバッグ
 
-# Get Maximum Number of Last Line
+```vb
+Debug.print("a")
+MsgBox "b"
+```
+
+# 関数
+
+```vb
+'ByVal値渡し
+ByVal str As String
+'ByRef参照渡し
+ByRef str As String
+
+'Sub(void)
+Sub f1()
+
+'Function
+Function f2() As String
+  f2 = 'string'
+
+'呼び出し
+Call f
+f2
+```
+
+---
+
+# 最終行取得
 
 ```vb
 sheet_name = "Sheet Name"
@@ -134,120 +151,76 @@ Worksheets(sheet_name).Cells(Rows.Count, 1).End(xlUp).Row
 ' 1 column
 ```
 
-# Get Sheet Name
 
+# 全シート名取得
 ```vb
 Dim i As Long
 For i = 1 To Worksheets.Count
-    Cells(i, 1) = Worksheets(i).Name
+    Debug.Print Worksheets(i).Name
 Next
 ```
 
-# File exist
+# ファイル場所について
+
+```vb
+'ドキュメントフォルダ下
+"book.xlsx" ' ファイル名のみ記載する
+' ".\book.xlsx"も同様にドキュメントフォルダ下
+
+'実行ファイルと同じ場所
+ThisWorkbook.Path & "book.xlsx"
+
+'絶対パス
+"C:\book.xlsx"
+
+```
+
+# ファイル存在確認
 
 ```vb
 Dim str As String: str = "filename"
 If Dir(str) <> "" Then
-    MsgBox "Exist"
+    MsgBox "有り"
 Else
-    MsgBox "None"
+    MsgBox "無し"
 End If
 ```
 
-# Open Book
-
-## Manual
+# ファイルを開く
 
 ```vb
-Dim strFilePath As String
-strFilePath = Application.GetOpenFilename(Filefilter:="Any,*")
-Workbooks.Open Filename:=strFilePath
+' 選択式
+Dim filename As String
+filename = Application.GetOpenFilename(FileFilter:="Excelファイル,*.xls*,CSVファイル,*.csv")
 
-Dim wb1
-Set wb1 = ThisWorkbook ' this book
-Dim FSO As Object
-Set FSO = CreateObject("Scripting.FileSystemObject")
-Dim wb2
-Set wb2 = Workbooks(FSO.GetBaseName(strFilePath) & ".xlsx") ' another
-' Processing
-wb2.Close
+' 選択式（続き）、プログラム内 
+Dim wb As Workbook
+Set wb = Workbooks.Open(filename)
+' 処理
+wb.Close
 ```
 
-## Auto(in Program)
+# 印刷プリント
 
 ```vb
-Dim wb1
-Set wb1 = ThisWorkbook
-Dim wb2
-Set wb2 = Workbooks.Open("Book1.xlsx")
-
-Dim i
-sheet_name = "sheet Name"
-For i = 1 To wb2.Worksheets(sheet_name).Cells(Rows.Count, 1).End(xlUp).Row
-    Debug.Print (wb2.Worksheets(sheet_name).Cells(i, 1).Value)
-Next i
-wb2.Close
-```
-
-### Target File Name
-| absolute path | location |
-| --- | --- |
-| File Name | Documents |
-| relative path | Documents |
-| Current Dir | ThisWorkbook.Path & "File Name" |
-
-# Delete Cell Values
-
-```vb
-Selection.ClearContents
-```
-
-| - | - |
-| --- | --- |
-| All Cells | Cells.Select |
-| A Column | Columns("A:A").Select |
-| B2 Cells | Range("B2").Select |
-
-# Print
-
-```vb
-' Check Printer
+' プリンタのチェック
 MsgBox Application.ActivePrinter
-' Print Out
+' プリンタの指定
 Application.ActivePrinter = ""
-' sheet.PrintOut
+' sheetの印刷
 ActiveSheet.PrintOut
 ```
 
-# get value from key
-
-## sheet a
-
-| A | B |
-| --- | --- |
-| key1 | value1 |
-| key2 | value2 |
-
-## sheet b
-
-| A |
-| --- |
-| key1 |
+# シートの指定の仕方、セルの指定
 
 ```vb
-
-Dim a As Worksheet: Set a = Sheets("a")
-Dim b As Worksheet: Set b = Sheets("b")
-
-For i = 1 To a.Cells(Rows.Count, 1).End(xlUp).Row
-  k = a.Cells(i, 1).Value
-  For j = 1 To b.Cells(Rows.Count, 1).End(xlUp).Row
-    k2 =  b.Cells(j, 1).Value
-    If k = k2 Then
-      Debug.Print (a.Cells(i, 2).Value)
-      Exit For
-    End If
-  Next j
-Next i
-
+Dim wb As Workbook
+Dim ws As Worksheet
+Set ws = wb.Sheets("SheetName")
+' wsには、Sheets("SheetName")が代入されるわけではなく、
+' wsには、wb.Sheets("SheetName")が代入されている。
+' wb.wsとは書けない。
+Debug.Print (ws.Cells(1,1).Value)
+'または
+Debug.Print (wb.Worksheets(ws.Name).Cells(1,1).Value)
 ```
