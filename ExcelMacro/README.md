@@ -80,13 +80,6 @@ Else
 End if
 ```
 
-# 特別な変数
-
-- ThisWorkbook
-- ThisWorkbook.Path
-- ActiveWorkBook
-- ActiveSheet
-
 ## 演算子
 
 | 意味 | 演算子 | 例 |
@@ -97,6 +90,13 @@ End if
 | or | Or | True Or False |
 | 否定 | Not | Not False |
 
+
+# 特別な変数
+
+- ThisWorkbook
+- ThisWorkbook.Path
+- ActiveWorkBook
+- ActiveSheet
 
 # 繰り返し
 
