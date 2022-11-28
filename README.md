@@ -102,6 +102,4 @@ install: --no-document
 update: --no-document
 EOF
 
-git clone 'https://github.com/YumaYX/RubyBox' && cp -pr RubyBox/* ${DIR}
-
 ```
