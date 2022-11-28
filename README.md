@@ -2,7 +2,9 @@
 
 ## Concept
 
-Making a workspace on your computer.
+- Making a workspace on your computer
+- Initial Settings
+
 
 ### Directories
 
@@ -103,3 +105,13 @@ update: --no-document
 EOF
 
 ```
+
+# Dictionary Items
+
+- Name
+- Affiliation
+- ID
+- Mail Address
+- Tel
+- Location
+- Work Folders
