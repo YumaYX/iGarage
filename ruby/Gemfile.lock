@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    redcarpet (3.5.1)
+
+PLATFORMS
+  x86_64-darwin-21
+
+DEPENDENCIES
+  redcarpet (>= 3.5.1)
+
+BUNDLED WITH
+   2.3.11
