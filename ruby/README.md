@@ -1,8 +1,4 @@
-# RubyBox
-
 - [オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル (Ruby 3.1 リファレンスマニュアル)](https://docs.ruby-lang.org/ja/3.1/doc/index.html)
-
-Welcome to the RubyBox wiki!
 
 ```ruby
 x_dow    = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
