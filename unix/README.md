@@ -24,13 +24,13 @@ done
 YYYYMMDD
 
 ```sh
-date +%Y%m%d
+`date +%Y%m%d`
 ```
 
 YYYYMMDDhhmmss
 
 ```sh
-date +%Y%m%d%H%M%S
+`date +%Y%m%d%H%M%S`
 ```
 
 # タイムスタンプ

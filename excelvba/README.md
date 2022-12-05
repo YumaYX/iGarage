@@ -1,8 +1,7 @@
 # セル
 
 - Cells(Y,X)
-- Range("cell / cell name")
-- Range("Table")
+- Range("cell / cell name / table")
 
 ## 選択
 
