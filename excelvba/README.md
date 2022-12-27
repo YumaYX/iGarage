@@ -243,4 +243,64 @@ Public Function hash(ByRef table As Range, _
   Next
 End Function
 ' hash(range_table,key_clm ,key, val_clm)
+Sub main()
+  Set ws = ActiveSheet
+  Set t = ws.Range("t")
+  v = hash(t,key_clm ,key, val_clm)
+End Sub
+```
+
+
+# テーブルをJson化
+
+```vb
+Function json_kv(ByVal str As Variant) As String
+  If ((2 <= VarType(str)) And (VarType(str) <= 5)) Then
+    json_kv = str
+    Exit Function
+  ElseIf VarType(str) = 11 Then
+    json_kv = LCase(str)
+    Exit Function
+  End If
+  json_kv = """" & Replace(CStr(str), """", "\""") & """"
+End Function
+
+Sub filewriter(ByVal output_filename As String, ByRef contents As String)
+  Open output_filename For Output As #1
+  Print #1, contents
+  Close #1
+End Sub
+
+Sub table2json(ByVal filename As String, ByVal table As Range)
+  Dim columns As VBA.Collection
+  Set columns = New VBA.Collection
+  For Each column_name In table.ListObject.HeaderRowRange
+    columns.Add column_name
+  Next column_name
+
+  Dim output_json As String
+  output_json = "["
+
+  For Each Tuple In table.ListObject.ListRows
+    output_json = output_json + "{"
+    column_index = 1
+    For Each element In Tuple.Range
+      output_json = output_json & json_kv(columns(column_index)) & ":" & json_kv(element) & ","
+      column_index = column_index + 1
+    Next element
+    output_json = Left(output_json, Len(output_json) - 1)
+    output_json = output_json + "},"
+  Next Tuple
+
+  output_json = Left(output_json, Len(output_json) - 1)
+  output_json = output_json + "]"
+
+  Call filewriter(filename, output_json)
+End Sub
+
+Sub main()
+  Set ws = ActiveSheet
+  Set t = ws.Range("t")
+  Call table2json("output.json", t)
+End Sub
 ```
