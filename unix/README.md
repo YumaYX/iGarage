@@ -18,6 +18,14 @@ do
 done
 ```
 
+# Commentout
+
+```sh
+<< COMMENTOUT
+
+COMMENTOUT
+```
+
 
 # 日付取得
 
