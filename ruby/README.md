@@ -1,17 +1,3 @@
-[オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル (Ruby 3.1 リファレンスマニュアル)](https://docs.ruby-lang.org/ja/3.1/doc/index.html)
-
-```ruby
-x_dow    = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-```
-
-```ruby
-x_dow_jp = ['日', '月', '火', '水', '木', '金', '土']
-```
-
-```ruby
-x_month  = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-```
-
 # JSON
 
 ```ruby
@@ -153,4 +139,20 @@ class libTest < Minitest::Test
   end
 end
 ```
+
+```ruby
+x_dow    = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+```
+
+```ruby
+x_dow_jp = ['日', '月', '火', '水', '木', '金', '土']
+```
+
+```ruby
+x_month  = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+```
+
+### Ref.
+
+- [オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル (Ruby 3.1 リファレンスマニュアル)](https://docs.ruby-lang.org/ja/3.1/doc/index.html)
 
